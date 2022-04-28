@@ -22,25 +22,60 @@ class Body extends StatelessWidget {
           ),
         ),
         Categories(),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+            child: GridView.builder(
+                itemCount: products.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: kDefaultPaddin,
+                    crossAxisSpacing: kDefaultPaddin,
+                    childAspectRatio: 0.75),
+                itemBuilder: (context, index) =>
+                    ItemCard(product: products[index], press: () {})),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ItemCard extends StatelessWidget {
+  final Product product;
+  final Function press;
+  const ItemCard({
+    Key? key,
+    required this.product,
+    required this.press,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
         Container(
           padding: const EdgeInsets.all(kDefaultPaddin),
-          height: 180,
-          width: 160,
+          // Height and width were used to demo at first,
+          // but not needed anymore
+          // height: 180,
+          // width: 160,
           decoration: BoxDecoration(
-            color: products[0].color,
+            color: product.color,
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Image.asset(products[0].image),
+          child: Image.asset(product.image),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
           child: Text(
-            products[0].title,
+            product.title,
             style: const TextStyle(color: kTextLightColor),
           ),
         ),
-        const Text(
-          "\$234",
+        Text(
+          "\$${product.price}",
           style: TextStyle(fontWeight: FontWeight.bold),
         )
       ],
