@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/screens/details/components/body.dart';
 import '../../models/Product.dart';
 import '../home/components/app_bar.dart';
 
@@ -15,6 +16,7 @@ class DetailsScreen extends StatelessWidget {
         Colors.white,
         () => Navigator.pop(context),
       ),
+      body: Body(product: product),
     );
   }
 }
