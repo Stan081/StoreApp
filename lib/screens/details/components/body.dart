@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:store_app/constants.dart';
 import 'package:store_app/models/Product.dart';
+import 'package:store_app/screens/details/components/description.dart';
 import 'package:store_app/screens/details/components/product_title_with_image.dart';
 
-import 'color_dot.dart';
+import 'add_to_cart.dart';
+import 'color_andd_size.dart';
+import 'counter_with_fav_btn.dart';
 
 class Body extends StatelessWidget {
   final Product product;
@@ -26,7 +29,6 @@ class Body extends StatelessWidget {
                     top: size.height * 0.12,
                     left: kDefaultPaddin,
                     right: kDefaultPaddin),
-                height: 500,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -36,34 +38,23 @@ class Body extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Color"),
-                            Row(
-                              children: const [
-                                ColorDot(
-                                  color: Color(0xFF356C95),
-                                  isSelected: true,
-                                ),
-                                ColorDot(
-                                  color: Color(0xFFF8C078),
-                                ),
-                                ColorDot(
-                                  color: Color(0xFFA29B9B),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    )
+                    ColorAndSize(product: product),
+                    const SizedBox(
+                      height: kDefaultPaddin / 2,
+                    ),
+                    Description(product: product),
+                    const SizedBox(
+                      height: kDefaultPaddin / 2,
+                    ),
+                    const CounterWithFavBtn(),
+                    const SizedBox(
+                      height: kDefaultPaddin / 2,
+                    ),
+                    AddToCart(product: product)
                   ],
                 ),
               ),
-              ProductTitleWithImage(product: product)
+              ProductTitleWithImage(product: product),
             ],
           ),
         )
